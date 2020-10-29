@@ -33,13 +33,21 @@ int main(void)
   /*Enables clock for GPIO port B*/
   *((volatile uint32_t *) (uint32_t)(0x40021000 + 0x00000014U)) |= (uint32_t)(1 << 18);
 
+  	
+  /*Enables clock for GPIO port A*/
+  *((volatile uint32_t *) 0x40021000 + 0x00000014U) |= (uint32_t)(1 << 17);
+
+  /*GPIOA pin3  setup*/
+  *((volatile uint32_t *)(GPIOA_BASE_ADDR)) &= ~(uint32_t)(0x3 << 6); 
+  *((volatile uint32_t *)(GPIOA_BASE_ADDR)) |= (uint32_t)(0x0 << 6);
+
   /*GPIOB pin 3 and 6 setup*/
   /*GPIO MODER register*/
   //Set mode for pin 3
-  *((volatile uint32_t *)((uint32_t)0x48000400)) &= ~(uint32_t)(0x3 << 6);
-  *((volatile uint32_t *)((uint32_t)0x48000400)) |= (uint32_t)(1 << 6);
-  //Set mode for pin 6
-  *((volatile uint32_t *)((uint32_t)0x48000400)) &= ~(uint32_t)(0x3 << 12);
+  *((volatile uint32_t *)(GPIOB_BASE_ADDR) &= ~(uint32_t)(0x3 << 6);
+  *((volatile uint32_t *)(GPIOB_BASE_ADDR) |= (uint32_t)(1 << 6);
+  //Set mode for pin 4
+  *((volatile uint32_t *)(GPIOB_BASE_ADDR) &= ~(uint32_t)(0x3 << 8);
 
   /*GPIO OTYPER register*/
   *((volatile uint32_t *)((uint32_t)(0x48000400 + 0x04U))) &= ~(1 << 3);
@@ -49,8 +57,8 @@ int main(void)
   *((volatile uint32_t *)((uint32_t)(0x48000400 + 0x08U))) &= ~(0x3 << 6);
 
   /*GPIO PUPDR register, reset*/
-  //Set pull up for GPIOB pin 6 (input)
-  *((volatile uint32_t *)((uint32_t)(0x48000400 + 0x0CU))) |= (1 << 12);
+  //Set pull up for GPIOB pin 4 (input)
+  *((volatile uint32_t *)((uint32_t)(0x48000400 + 0x0CU))) |= (1 << 8);
   //Set no pull for GPIOB pin 3
   *((volatile uint32_t *)((uint32_t)(0x48000400 + 0x0CU))) &= ~(0x3 << 6);
 
