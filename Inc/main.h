@@ -70,7 +70,7 @@ extern "C" {
 #define	RCC_AHBENR_REG			*((volatile uint32_t *) (uint32_t)(RCC_BASE_ADDR + 0x00000014U))
 
 #define LED_ON					*((volatile uint32_t *)((uint32_t)(0x48000400 + 0x18U))) |= (1 << 3)   	//GPIOB pin 3
-#define LED_OFF					*((volatile uint32_t *)((uint32_t)0x48000400 + 0x28U)) |= (1 << 3);		//GPIOB pin 3
+#define LED_OFF					*((volatile uint32_t *)((uint32_t)0x48000400 + 0x28U)) |= (1 << 3)		//GPIOB pin 3
 
 /* USER CODE END EM */
 
