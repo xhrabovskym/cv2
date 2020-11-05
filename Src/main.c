@@ -37,35 +37,35 @@ int main(void)
   /*Enables clock for GPIO port A*/
   *((volatile uint32_t *) 0x40021000 + 0x00000014U) |= (uint32_t)(1 << 17);
 
-  /*GPIOA pin3  setup*/
+  /*GPIOA pin4  setup*/
   *((volatile uint32_t *)(GPIOA_BASE_ADDR)) &= ~(uint32_t)(0x3 << 8); 
   *((volatile uint32_t *)(GPIOA_BASE_ADDR)) |= (uint32_t)(0x0 << 8);
 
-  /*GPIOB pin 3 and 6 setup*/
+  /*GPIOB pin 3 and 4 setup*/
   /*GPIO MODER register*/
-  //Set mode for pin 3
+  //Set mode for pin 4
   *((volatile uint32_t *)(GPIOB_BASE_ADDR)) &= ~(uint32_t)(0x3 << 8);
   *((volatile uint32_t *)(GPIOB_BASE_ADDR)) |= (uint32_t)(1 << 8);
-  //Set mode for pin 4
+  //Set mode for pin 3
   *((volatile uint32_t *)(GPIOB_BASE_ADDR)) &= ~(uint32_t)(0x3 << 6);
 
   /*GPIO OTYPER register*/
   *((volatile uint32_t *)((uint32_t)(0x48000400 + 0x04U))) &= ~(1 << 4);
 
   /*GPIO OSPEEDR register*/
-  //Set Low speed for GPIOB pin 3
+  //Set Low speed for GPIOB pin 4
   *((volatile uint32_t *)((uint32_t)(0x48000400 + 0x08U))) &= ~(0x3 << 8);
 
   /*GPIO PUPDR register, reset*/
-  //Set pull up for GPIOB pin 4 (input)
+  //Set pull up for GPIOB pin 3 (input)
   *((volatile uint32_t *)((uint32_t)(0x48000400 + 0x0CU))) |= (1 << 6);
-  //Set no pull for GPIOB pin 3
+  //Set no pull for GPIOB pin 4
   *((volatile uint32_t *)((uint32_t)(0x48000400 + 0x0CU))) &= ~(0x3 << 8);
 
   while (1)
   {
-	  //GPIO IDR, read input from pin 4
-	  if(!(*((volatile uint32_t *)((uint32_t)(0x48000400 + 0x10U))) & (1 << 4)))
+	  //GPIO IDR, read input from pin 3
+	  if(!(*((volatile uint32_t *)((uint32_t)(0x48000400 + 0x10U))) & (1 << 3)))
 	  {
 		  LED_ON;
 	  }
